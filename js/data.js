@@ -82,7 +82,7 @@ const addOffers = () => {
         guests: getRandomInt(1, 12),
         checkin: getRandomElementArr(checkinTime),
         checkout: getRandomElementArr(checkoutTime),
-        features: (shuffleArray(features)).slice(getRandomInt(0, features.length - 1)),
+        features: shuffleArray(features).slice(0, getRandomInt(0, features.length - 1)),
         description: getRandomElementArr(description),
         photos: photos.slice(getRandomInt(0, 2)),
       },
