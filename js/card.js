@@ -1,7 +1,6 @@
 import { offers } from './data.js'
 
 const cardTemplate = document.querySelector('#card').content
-// const similarCardFragment = document.createDocumentFragment();
 
 const types = {
   flat: {
@@ -20,50 +19,36 @@ const types = {
 
 const renderCard = (offers) => {
   const offer = cardTemplate.cloneNode(true)
-  // сделать деструктаризацию
-  offer.querySelector('.popup__title').textContent = offers.offer.title;
-  offer.querySelector('.popup__text--address').textContent = offers.offer.address;
-  offer.querySelector('.popup__text--price').textContent = `${offers.offer.price} ₽/ночь`;
-  offer.querySelector('.popup__type').textContent = types[offers.offer.type].ru;
-  offer.querySelector('.popup__text--capacity').textContent = `${offers.offer.rooms} комнаты для ${offers.offer.guests} гостей`;
-  offer.querySelector('.popup__text--time').textContent = `Заезд после ${offers.offer.checkin}, выезд до ${offers.offer.checkout}`;
+  let {offer: {title, address, price, type, rooms, guests, checkin, checkout, features, description, photos}} = offers;
+  offer.querySelector('.popup__title').textContent = title;
+  offer.querySelector('.popup__text--address').textContent = address;
+  offer.querySelector('.popup__text--price').textContent = `${price} ₽/ночь`;
+  offer.querySelector('.popup__type').textContent = types[type].ru;
+  offer.querySelector('.popup__text--capacity').textContent = `${rooms} комнаты для ${guests} гостей`;
+  offer.querySelector('.popup__text--time').textContent = `Заезд после ${checkin}, выезд до ${checkout}`;
 
   const featuresList = offer.querySelector('.popup__features');
 
-  // featuresList.innerHTML = '';
-  // const listFragment = document.createDocumentFragment();
-  // что-то накосячил с циклом делаю не много лишек, а много УЛ в том числе
-  // for (let i = 0; i < offers.offer.features.length; i++) {
-  //   const newListElement = document.createElement('li');
-  //   newListElement.classList.add('popup__feature', 'popup__feature--'+ offers.offer.features[i]);
-  //   // newListElement.classList.add(`popup__feature`, `popup__feature--${offers.offer.features[i]}`);
-  //   listFragment.appendChild(newListElement)
-  //   featuresList.appendChild(listFragment)
-  // }
-
-  if (offers.offer.features.length > 0) {
+  if (features.length > 0) {
     const ferturesItems = featuresList.querySelectorAll('.popup__feature')
     ferturesItems.forEach(item => {
-      if (offers.offer.features.indexOf(item.classList[1].replace('popup__feature--', '')) === -1) {
+      if (features.indexOf(item.classList[1].replace('popup__feature--', '')) === -1) {
         item.remove()
       }
     });
   }
 
-  offer.querySelector('.popup__description').textContent = offers.offer.description;
+  console.log(offers)
+  offer.querySelector('.popup__description').textContent = description;
 
   const photosList = offer.querySelector('.popup__photos');
-  photosList.innerHTML = '';
   const photoFragment = document.createDocumentFragment();
+  const photoElement = photosList.querySelector('.popup__photo')
+  console.log(photoElement)
 
-  //склонировать img
-  for (let i = 0; i < offers.offer.photos.length; i++) {
-    const newPhoto = document.createElement('img');
-    newPhoto.classList.add('popup__photo');
-    newPhoto.src = offers.offer.photos[i];
-    newPhoto.style.width = '45px';
-    newPhoto.style.height = '40px';
-    photoFragment.appendChild(newPhoto)
+  for (let i = 0; i < photos.length; i++) {
+    photoElement.src = photos[i];
+    photoFragment.appendChild(photoElement)
     photosList.appendChild(photoFragment)
   }
 
