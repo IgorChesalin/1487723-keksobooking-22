@@ -19,7 +19,7 @@ const types = {
 
 const renderCard = (offers) => {
   const offer = cardTemplate.cloneNode(true)
-  let {offer: {title, address, price, type, rooms, guests, checkin, checkout, features, description, photos}} = offers;
+  let {author: {avatar}, offer: {title, address, price, type, rooms, guests, checkin, checkout, features, description, photos}} = offers;
   offer.querySelector('.popup__title').textContent = title;
   offer.querySelector('.popup__text--address').textContent = address;
   offer.querySelector('.popup__text--price').textContent = `${price} ₽/ночь`;
@@ -30,27 +30,29 @@ const renderCard = (offers) => {
   const featuresList = offer.querySelector('.popup__features');
 
   if (features.length > 0) {
-    const ferturesItems = featuresList.querySelectorAll('.popup__feature')
-    ferturesItems.forEach(item => {
+    const fearturesItems = featuresList.querySelectorAll('.popup__feature')
+    fearturesItems.forEach(item => {
       if (features.indexOf(item.classList[1].replace('popup__feature--', '')) === -1) {
         item.remove()
       }
     });
   }
 
-  console.log(offers)
   offer.querySelector('.popup__description').textContent = description;
 
   const photosList = offer.querySelector('.popup__photos');
+  const photoTemplate = photosList.querySelector('.popup__photo')
+  photosList.innerHTML = '';
   const photoFragment = document.createDocumentFragment();
-  const photoElement = photosList.querySelector('.popup__photo')
-  console.log(photoElement)
-
+  
   for (let i = 0; i < photos.length; i++) {
-    photoElement.src = photos[i];
-    photoFragment.appendChild(photoElement)
-    photosList.appendChild(photoFragment)
+    const photo = photoTemplate.cloneNode(true)
+    photo.src = photos[i];
+    photoFragment.appendChild(photo)
+    photosList.appendChild(photoFragment)    
   }
+
+offer.querySelector('.popup__avatar').src = avatar;
 
   return offer;
 }
