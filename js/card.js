@@ -5,19 +5,19 @@ const cardTemplate = document.querySelector('#card').content
 const types = {
   flat: {
     ru: 'Квартира',
-    minPrice: '1 000',
+    minPrice: 1000,
   },
   bungalow: {
     ru: 'Бунгало',
-    minPrice: '0',
+    minPrice: 0,
   },
   house: {
     ru: 'Дом',
-    minPrice: '5 000',
+    minPrice: 5000,
   },
   palace: {
     ru: 'Дворец',
-    minPrice: '10 000',
+    minPrice: 10000,
   },
 }
 

@@ -8,9 +8,12 @@ typeFilter.addEventListener('change', () => {
 })
 
 const timeInFilter = document.querySelector('#timein')
-const timeInFilterValue = document.querySelector('#timein').getElementsByTagName('option')
-const timeOutFilter = document.querySelector('#timeout').getElementsByTagName('option')
+const timeOutFilter = document.querySelector('#timeout')
 
 timeInFilter.addEventListener('change', () => {
-  timeOutFilter.value = timeInFilterValue.value;
+  timeOutFilter.value = timeInFilter.value;
+})
+
+timeOutFilter.addEventListener('change', () => {
+  timeInFilter.value = timeOutFilter.value;
 })
