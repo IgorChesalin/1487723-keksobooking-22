@@ -61,7 +61,7 @@ const renderCard = (offers) => {
   return offer;
 }
 
-const mapCanvas = document.querySelector('#map-canvas')
-mapCanvas.appendChild(renderCard(offers[0]))
+// const mapCanvas = document.querySelector('#map-canvas')
+// mapCanvas.appendChild(renderCard(offers[0]))
 
 export { types };
