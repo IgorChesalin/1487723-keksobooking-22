@@ -65,6 +65,7 @@ mainPinMarker.addTo(map);
 const adressInput = document.querySelector('#address')
 
 mainPinMarker.on('moveend', (evt) => {
-  adressInput.value = (evt.target.getLatLng());
+    let {lat, lng} = evt.target.getLatLng();
+    adressInput.value = `${lat.toFixed(5)} ${lng.toFixed(5)}`
 });
 
